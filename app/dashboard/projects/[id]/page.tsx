@@ -2,6 +2,7 @@ import { getCurrentUser } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
+import StatusUpdateForm from "./StatusUpdateForm";
 
 export default async function ProjectPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -54,6 +55,11 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
               </div>
             </div>
           </div>
+        </div>
+
+        <div className="my-6">
+          <h3 className="text-sm font-medium text-gray-700 mb-3">Update Status</h3>
+          <StatusUpdateForm projectId={project.id} currentStatus={project.status} />
         </div>
 
         <div className="bg-white rounded-lg shadow p-8">

@@ -91,3 +91,54 @@ export async function saveFileMetadata(
 
   return file;
 }
+
+export async function updateProjectStatus(projectId: string, newStatus: string) {
+  const user = await getCurrentUser()
+
+  if (!user) {
+    throw new Error('No user detected')
+  }
+
+  // Verify user owns this project
+  const project = await prisma.project.findUnique({
+    where: { id: projectId },
+  })
+
+  if (!project) {
+    throw new Error('Project not found')
+  }
+
+  if (project.userId !== user.id && user.role !== 'admin') {
+    throw new Error('Unauthorized')
+  }
+
+  // Validate status
+  const validStatuses = ['draft', 'active', 'completed']
+  if (!validStatuses.includes(newStatus)) {
+    throw new Error('Invalid status')
+  }
+
+  // Update project status
+  const updatedProject = await prisma.project.update({
+    where: { id: projectId },
+    data: { status: newStatus },
+  })
+
+  // Create audit log
+  await prisma.auditLog.create({
+    data: {
+      action: 'STATUS_UPDATED',
+      userId: user.id,
+      metadata: JSON.stringify({
+        projectId,
+        oldStatus: project.status,
+        newStatus,
+      }),
+    },
+  })
+
+  revalidatePath(`/dashboard/projects/${projectId}`)
+  revalidatePath('/dashboard')
+
+  return updatedProject
+}
