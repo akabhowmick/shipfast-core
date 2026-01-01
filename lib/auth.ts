@@ -12,5 +12,8 @@ export async function getCurrentUser() {
     where: { clerkId: userId },
   });
 
+  console.log("Clerk userId from auth():", userId);
+  console.log("User found in DB:", user);
+
   return user;
 }
