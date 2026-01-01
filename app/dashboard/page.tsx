@@ -1,21 +1,14 @@
 import { getCurrentUser } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
+import { SignOutButton } from "@clerk/nextjs";
 import Link from "next/link";
 
-// const dummyAdmin = {
-//   id: "123",
-//   email: "1@2.com",
-//   clerkId: "123",
-//   role: "admin",
-//   createdAt: Date.now(),
-// };
-
 export default async function DashboardPage() {
-  const user = await getCurrentUser(); // || dummyAdmin;
+  const user = await getCurrentUser();
 
   if (!user) {
-    redirect("/sign-in");
+    redirect("/syncing");
   }
 
   // Fetch user's projects
@@ -40,12 +33,19 @@ export default async function DashboardPage() {
               </span>
             )}
           </div>
-          <Link
-            href="/dashboard/new"
-            className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700"
-          >
-            Create Project
-          </Link>
+          <div>
+            <Link
+              href="/dashboard/new"
+              className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700"
+            >
+              Create Project
+            </Link>
+            <SignOutButton>
+              <button className="bg-gray-200 text-gray-700 mx-1 px-6 py-3 rounded-lg hover:bg-gray-300">
+                Sign Out
+              </button>
+            </SignOutButton>
+          </div>
         </div>
 
         {projects.length === 0 ? (
