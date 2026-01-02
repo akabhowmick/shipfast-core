@@ -134,7 +134,7 @@ export default async function AdminPage() {
             <h2 className="text-xl font-bold">Recent Activity</h2>
           </div>
           <div className="divide-y">
-            {recentAuditLogs.map((log) => (
+            {recentAuditLogs.map((log: (typeof recentAuditLogs)[0]) => (
               <div key={log.id} className="p-4 hover:bg-gray-50">
                 <div className="flex justify-between items-start">
                   <div>

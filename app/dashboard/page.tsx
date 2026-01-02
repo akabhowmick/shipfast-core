@@ -57,7 +57,7 @@ export default async function DashboardPage() {
           </div>
         ) : (
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {projects.map((project) => (
+            {projects.map((project: (typeof projects)[0]) => (
               <Link
                 key={project.id}
                 href={`/dashboard/projects/${project.id}`}
