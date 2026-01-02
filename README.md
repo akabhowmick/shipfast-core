@@ -106,11 +106,11 @@ This application follows a **server-first architecture**:
 ```
 
 **Key Security Principles:**
-- ✅ Never trust client-provided user data
-- ✅ Always verify user identity server-side
-- ✅ Role stored in database, not client-side
-- ✅ Authorization checked before every mutation
-- ✅ Middleware protects routes at the edge
+-  Never trust client-provided user data
+-  Always verify user identity server-side
+-  Role stored in database, not client-side
+-  Authorization checked before every mutation
+-  Middleware protects routes at the edge
 
 ### File Upload Flow
 
@@ -351,13 +351,13 @@ This app is deployed on Vercel with automatic deployments from the `main` branch
 
 **Key Implementation Details:**
 
-- ✅ All mutations use Server Actions (`'use server'`)
-- ✅ All pages are Server Components (direct DB access)
-- ✅ Authentication verified on every request (middleware)
-- ✅ Role checks happen server-side before data access
-- ✅ Audit logs track all important actions
-- ✅ File upload authorization verified server-side
-- ✅ Error tracking via Sentry for observability
+-  All mutations use Server Actions (`'use server'`)
+-  All pages are Server Components (direct DB access)
+-  Authentication verified on every request (middleware)
+-  Role checks happen server-side before data access
+-  Audit logs track all important actions
+-  File upload authorization verified server-side
+-  Error tracking via Sentry for observability
 
 ## Project Structure
 ```
