@@ -37,7 +37,7 @@ export default function StatusUpdateForm({
 
   return (
     <div className="flex gap-2">
-      {statuses.map((status) => (
+      {statuses.map((status: (typeof statuses)[0]) => (
         <button
           key={status.value}
           onClick={() => handleStatusChange(status.value)}

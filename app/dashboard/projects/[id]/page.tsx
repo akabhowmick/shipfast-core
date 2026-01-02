@@ -85,7 +85,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
             </div>
           ) : (
             <div className="space-y-3">
-              {project.files.map((file) => (
+              {project.files.map((file: (typeof project.files)[0]) => (
                 <div
                   key={file.id}
                   className="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50"
