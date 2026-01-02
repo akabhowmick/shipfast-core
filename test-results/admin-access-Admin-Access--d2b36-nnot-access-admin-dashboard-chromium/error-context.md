@@ -1,0 +1,53 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e7]:
+        - heading "Create your account" [level=1] [ref=e8]
+        - paragraph [ref=e9]: Welcome! Please fill in the details to get started.
+      - generic [ref=e11]:
+        - generic [ref=e12]:
+          - generic [ref=e13]:
+            - generic [ref=e15]:
+              - generic [ref=e16]:
+                - generic [ref=e17]: First name
+                - generic [ref=e18]: Optional
+              - textbox "First name" [ref=e19]
+            - generic [ref=e22]:
+              - generic [ref=e23]:
+                - generic [ref=e24]: Last name
+                - generic [ref=e25]: Optional
+              - textbox "Last name" [ref=e26]
+          - generic [ref=e30]:
+            - generic [ref=e32]: Email address
+            - textbox "Email address" [ref=e33]:
+              - /placeholder: Enter your email address
+          - generic [ref=e37]:
+            - generic [ref=e39]: Password
+            - generic [ref=e40]:
+              - textbox "Password" [ref=e41]:
+                - /placeholder: Enter your password
+              - button "Show password" [ref=e42] [cursor=pointer]:
+                - img [ref=e43]
+        - button "Continue" [ref=e49] [cursor=pointer]:
+          - generic [ref=e50]:
+            - text: Continue
+            - img [ref=e51]
+    - generic [ref=e53]:
+      - generic [ref=e54]:
+        - generic [ref=e55]: Already have an account?
+        - link "Sign in" [ref=e56] [cursor=pointer]:
+          - /url: http://localhost:3000/sign-in
+      - generic [ref=e58]:
+        - generic [ref=e60]:
+          - paragraph [ref=e61]: Secured by
+          - link "Clerk logo" [ref=e62] [cursor=pointer]:
+            - /url: https://go.clerk.com/components
+            - img [ref=e63]
+        - paragraph [ref=e68]: Development mode
+  - button "Open Next.js Dev Tools" [ref=e74] [cursor=pointer]:
+    - img [ref=e75]
+  - alert [ref=e78]
+```
