@@ -2,6 +2,7 @@ import { Webhook } from "svix";
 import { headers } from "next/headers";
 import { WebhookEvent } from "@clerk/nextjs/server";
 import { prisma } from "@/lib/prisma";
+import { revalidatePath } from "next/cache";
 
 export async function POST(req: Request) {
   const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SECRET;
@@ -63,6 +64,10 @@ export async function POST(req: Request) {
     });
 
     console.log(`✅ User created in DB: ${email}`);
+    
+    // Revalidate relevant paths after user creation
+    revalidatePath("/dashboard");
+    revalidatePath("/syncing");
   }
 
   if (eventType === "user.updated") {
@@ -80,6 +85,9 @@ export async function POST(req: Request) {
     });
 
     console.log(`✅ User updated in DB: ${email}`);
+    
+    // Revalidate dashboard in case user info is displayed
+    revalidatePath("/dashboard");
   }
 
   if (eventType === "user.deleted") {
@@ -95,6 +103,10 @@ export async function POST(req: Request) {
     });
 
     console.log(`✅ User deleted from DB: ${id}`);
+    
+    // Revalidate dashboard and admin pages
+    revalidatePath("/dashboard");
+    revalidatePath("/admin");
   }
 
   return new Response("Webhook received", { status: 200 });

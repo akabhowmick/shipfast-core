@@ -9,7 +9,14 @@ export default async function Home() {
     redirect("/sign-in");
   }
 
-  await getCurrentUser();
+  // Try to get or create user in database
+  const user = await getCurrentUser();
+  
+  // If user is not yet synced, wait on syncing page
+  if (!user) {
+    redirect("/syncing");
+  }
 
+  // User exists, go to dashboard
   redirect("/dashboard");
 }
