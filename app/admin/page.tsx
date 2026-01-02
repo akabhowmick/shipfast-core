@@ -6,7 +6,7 @@ import Link from "next/link";
 export default async function AdminPage() {
   const user = await getCurrentUser();
 
-  // Server-side role check 
+  // Server-side role check
   if (!user || user.role !== "admin") {
     redirect("/dashboard");
   }
@@ -100,7 +100,7 @@ export default async function AdminPage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
-                {projects.map((project) => (
+                {projects.map((project: (typeof projects)[0]) => (
                   <tr key={project.id} className="hover:bg-gray-50">
                     <td className="px-6 py-4 font-medium">{project.name}</td>
                     <td className="px-6 py-4 text-sm text-gray-600">{project.user.email}</td>
